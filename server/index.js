@@ -18,7 +18,7 @@ var port = process.env.PORT || 3000;
 // Game.hasMany(Player);
 // Player.belongsTo(Team);
 // Player.belongsTo(Game);
-// app.use('/dist', express.static(path.join(__dirname, '../dist')));
+app.use('/dist', express.static(path.join(__dirname, '../dist')));
 
 app.use(express.static(path.join(__dirname,'../public')));
 
