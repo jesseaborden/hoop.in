@@ -8,13 +8,20 @@ playerController.GET = (req, res) => {
   //find game pluck id from game
   var token = req.query.token;
   var playerData = { team1: [], team2: [], queue: [] };
-  Game.findOne({ where: {token: token}})
-  .then(function(game){
-    Team.findAll({ where: {gameId: game.id}})
+  Game.findOne( { where: {token: token } })
+  .then(function(game) {
+    Team.findAll({ where: { gameId: game.id } })
     .then(function(teams){
-        var team1 = teams[0];
-        var team2 = teams[1];
-        Player.findAll({ where: {teamId: team1.id}})
+        if(teams[0].id < teams[1].id) {
+            team1 = teams[0];
+            team2 = teams[1];
+        }
+        else {
+            team1 = teams[1];
+            team2 = teams[0];
+        };
+
+        Player.findAll({ where: { teamId: team1.id }})
         .then(function(players1){
             playerData.team1 = players1;
             Player.findAll({ where: {teamId: team2.id}})
@@ -49,13 +56,13 @@ playerController.POST = (req, res) => {
     var requestToken = req.body.token; //get from req object, hard coding now
     //should be taken form the req object hard code now
     Game.findOne({ where: {token: requestToken}}).then(function(game){
-	    var newPlayer = Player.build({
-	    	arrivalTime: game.dataValues.time,
-	        active: false,
-	        queued: true,
-	        name: req.body.name,
-	        admin: false,
-	    });
+        var newPlayer = Player.build({
+            arrivalTime: game.dataValues.time,
+            active: false,
+            queued: true,
+            name: req.body.name,
+            admin: false,
+        });
         console.log('I found the game!',game);
         console.log('game id is:',game.dataValues.id);
         Team.findAll({where: {gameId: game.dataValues.id}}).then(function(teams){
@@ -113,12 +120,12 @@ playerController.POST = (req, res) => {
 playerController.DELETE = (req, res) => {
     console.log('i hit player controller delete!');
     console.log('and req.body is:',req.body);
-	var gameToken = req.body.token;
-	var playerName = req.body.name;
-	console.log(req.body.token)
+    var gameToken = req.body.token;
+    var playerName = req.body.name;
+    console.log(req.body.token)
 
-	Game.findOne({ where: {token: gameToken}})
-	.then(function(game){
+    Game.findOne({ where: {token: gameToken}})
+    .then(function(game){
         Player.findOne( {where: {
             name: playerName,
             gameId: game.id
@@ -141,7 +148,7 @@ playerController.DELETE = (req, res) => {
                 res.send('i deleted the player');
             })
         });
-	})
+    })
 }
 
 

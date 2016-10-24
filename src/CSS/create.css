@@ -10,9 +10,9 @@ input {
     text-align: center;
 }
 
-input[type=text]:focus {
-    border-bottom: 1px solid #FF7600;
-    outline: none;
+/* Change the white to any color ;) */
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
 button {
@@ -47,5 +47,14 @@ button a {
 }
 
 *:focus {
+    outline: none;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+input:hover, input:focus, button:hover {
+    border-bottom: 1px solid #FF7600;
     outline: none;
 }
