@@ -1,4 +1,4 @@
-.create-body input {
+input {
 	position: relative;
 	top: 100px;
 	margin: 35px 20px 0px 20px;
@@ -10,12 +10,12 @@
     text-align: center;
 }
 
-.create-body input[type=text]:focus {
+input[type=text]:focus {
     border-bottom: 1px solid #FF7600;
     outline: none;
 }
 
-.create-body button {
+button {
 	position: relative;
 	top: 100px;
 	margin: 35px 20px 0px 20px;
@@ -25,8 +25,27 @@
     border-bottom: 1px solid #95989A;
     text-align: center;
 }
+/*
+room styles*/
 
-.create-body button a {
+.room {
+    margin-top: 30px;
+}
+
+.room button {
+    position: initial;
+}
+
+.active-game button {
+    margin-top: 0px;
+    border-bottom: 0;
+}
+
+button a {
     color: #95989A;
     text-decoration: none;
+}
+
+*:focus {
+    outline: none;
 }
