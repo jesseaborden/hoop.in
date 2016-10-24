@@ -9,6 +9,7 @@ var path = require('path');
 // const Game = require('./controllers/game.js').game;
 // const Player = require('./controllers/player.js');
 const app = express();
+var port = process.env.PORT || 3000;
 
 // const router = require('./routers/player_router.js');
 // Team.belongsTo(Game);
@@ -30,7 +31,7 @@ app.get('*', function (request, response){
   response.sendFile(path.resolve(__dirname, '../public', 'index.html'))
 });
 
-app.listen(3000, function () {
+app.listen(port, function () {
 	console.log('Listnening on 3000');
 });
 
