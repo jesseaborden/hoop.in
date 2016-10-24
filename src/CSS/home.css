@@ -107,6 +107,9 @@ body {
     display: inline;
 }
 
+h3.col-md-8.text-center {
+    margin: 0 auto;
+}
 
 
 

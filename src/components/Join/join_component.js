@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import { Link } from 'react-router';
 import Autocomplete from 'react-google-autocomplete';
 import axios from 'axios';
+
+import CSS from "../../CSS/home.css";
+
 class Join extends Component {
     constructor (props){
         super(props);
@@ -61,11 +64,11 @@ class Join extends Component {
             <div className = 'text-center'>
                 <section><h1>Join Game</h1></section>
                 <form onSubmit={this.handleSubmit}>
-                    <div className = "form-inline">
-                        <input className= "form-control" type='text' value={this.state.name} onChange={this.handleNameInputChange.bind(this)} placeholder='name' required />
+                    <div>
+                        <input type='text' value={this.state.name} onChange={this.handleNameInputChange.bind(this)} placeholder='name' required />
                     </div>
                     <div className="form-inline">
-                        <input className= "form-control" type='text' value={this.state.token} onChange={this.handleCodeInputChange.bind(this)} placeholder='code' required />
+                        <input type='text' value={this.state.token} onChange={this.handleCodeInputChange.bind(this)} placeholder='code' required />
                     </div>
                     <div>
                         <span onClick={this.handleSubmit}><Link to={`room/${this.state.token}`} ><button type="submit">submit</button></Link></span>
