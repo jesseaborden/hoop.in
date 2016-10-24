@@ -34,9 +34,8 @@ class Player extends React.Component {
 		  	<li> 
 		  		<div className="text-center container">
 		  			<div className="row">
-		  				<div>{this.props.gameToken}</div>
-		  				<h3 className="col-md-8">{this.props.name}</h3> 
-		  				<button onClick={this.removePlayer.bind(this)} className="col-md-4 btn red">Remove</button>
+		  				<h3>{this.props.name}</h3> 
+		  				<button onClick={this.removePlayer.bind(this)}>Remove</button>
 		  			</div>
 		  		</div>
 		  	</li>

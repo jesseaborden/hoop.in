@@ -7,7 +7,7 @@ const Team = (props) => {
 		return <Player name={name.name} key={i} gameToken={props.gameToken} getTeam={props.getTeam} />;
 	});
 	return (
-		<div>
+		<div className="active-game">
 		<h1 className="text-center">{props.color}</h1>
 		<ul className="list-unstyled">{playerList}</ul>
 		</div>
