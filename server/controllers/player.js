@@ -17,15 +17,15 @@ playerController.GET = (req, res) => {
         Player.findAll({ where: {teamId: team1.id}})
         .then(function(players1){
             playerData.team1 = players1;
-        });
-        Player.findAll({ where: {teamId: team2.id}})
-        .then(function(players2){
-            playerData.team2 = players2;
-        });
-        Player.findAll({ where: {teamId: null}})
-        .then(function(queue){
-            playerData.queue = queue;
-            res.send(playerData);
+            Player.findAll({ where: {teamId: team2.id}})
+            .then(function(players2){
+                playerData.team2 = players2;
+                Player.findAll({ where: {teamId: null}})
+                .then(function(queue){
+                    playerData.queue = queue;
+                    res.send(playerData);
+                });
+            });
         });
     }).catch(function(){
         console.log("shit went left with the team get inside the game get")
@@ -102,7 +102,8 @@ playerController.POST = (req, res) => {
     }).catch(function(err){
         console.log('i couldnt find the game');
     });
-    res.send('/api/newPlayer');
+    var result = 'the new players name is:' + req.body.name + ' and the token was: ' + req.body.token;
+    res.send(result);
 };
 
 
@@ -118,19 +119,28 @@ playerController.DELETE = (req, res) => {
 
 	Game.findOne({ where: {token: gameToken}})
 	.then(function(game){
-		Team.findAll({ where: {gameId: game.id}})
-		.then(function(teams){
-			Player.destroy({ 
-				where: {
-					name: playerName
-				}
-			});
-            res.send('I deleted the player!');
-		}).catch(function(err){
-			console.log('Team not found');
-		});
-	}).catch(function(err){
-		console.log('Game not found');
+        Player.findOne( {where: {
+            name: playerName,
+            gameId: game.id
+        }})
+        .then(function(player){
+            Team.findOne({
+                where: {
+                    id: player.teamId
+                }
+            })
+            .then (function (team){
+                Player.destroy({
+                    where: {
+                        name: playerName,
+                        gameId: game.id
+                    }
+                })
+                var countMinus = team.dataValues.count - 1;
+                team.update({ count: countMinus});
+                res.send('i deleted the player');
+            })
+        });
 	})
 }
 
