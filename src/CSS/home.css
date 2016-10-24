@@ -111,5 +111,10 @@ h3.col-md-8.text-center {
     margin: 0 auto;
 }
 
+/* Change the white to any color ;) */
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
 
 
