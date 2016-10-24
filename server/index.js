@@ -18,8 +18,9 @@ var port = process.env.PORT || 3000;
 // Game.hasMany(Player);
 // Player.belongsTo(Team);
 // Player.belongsTo(Game);
+// app.use('/dist', express.static(path.join(__dirname, '../dist')));
 
-app.use(express.static('../public'));
+app.use(express.static(path.join(__dirname,'../public')));
 
 app.use(bodyParser.json());
 sequelize.sync({ force: true }).then(function () {
@@ -27,9 +28,9 @@ sequelize.sync({ force: true }).then(function () {
 
 app.use('/api', rootRouter);
 
-// app.get('*', function (request, response){
-//   response.sendFile(path.resolve(__dirname, '../public', 'index.html'))
-// });
+app.get('*', function (request, response){
+  response.sendFile(path.resolve(__dirname, '../public', 'index.html'))
+});
 
 app.listen(port, function () {
 	console.log('Listnening on 3000');
