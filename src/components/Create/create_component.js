@@ -19,10 +19,11 @@ class Create extends Component {
 	}
 
 	handleSubmit = (event) => {
+		var inputloc = document.getElementById("autocomplete").value;
 	    event.preventDefault();
 	    var name = this.state.name.trim();
-	    var location = this.state.location.trim();
-	    var time = this.state.time.trim();
+	    var location = inputloc;
+	    var time = this.state.time;
 	    if (!name || !location || !time) {
 	    	console.log('Missing input!');
 	    	return;
@@ -31,7 +32,7 @@ class Create extends Component {
 	    const self = this;
 	    axios.post('/api/newGame', {
 				name: this.state.name,
-				location: this.state.location,
+				location: location,
 				time: this.state.time
 			})
 		  .then(function (response) {
@@ -51,9 +52,9 @@ class Create extends Component {
 				<section><h1>Create Game</h1></section>
 				<div className='body'>
 					<form className='create-body'>
-						<input type='text' name='name' placeholder='name' value={this.state.name} onChange={nameEvent => this.setState({ name: nameEvent.target.value })} />
-						<Autocomplete types={['address']} type='text' name='location' placeholder='location' value={this.state.location} onChange={locationEvent =>this.setState({ location: locationEvent.target.value })} />
+						<input type='text' name='name' placeholder='name' value={this.state.name} onChange={nameEvent => this.setState({ name: nameEvent.target.value })} />			
 						<input type='time' name='time' value={this.state.time} onChange={timeEvent => this.setState({ time: timeEvent.target.value })} />
+    	  	 			<Autocomplete types={['address']} id="autocomplete" type='text' name='location' placeholder='location' value={this.state.location}  onChange={locationEvent =>this.setState({ location: locationEvent.target.value })} />
     	  	  <div>
     	  	  	<button onClick={this.handleSubmit}><Link to='/share' >submit</Link></button>
 							<button><Link to='/' >back</Link></button>
