@@ -9,6 +9,7 @@ class Player extends React.Component {
 
 	removePlayer() {
 		var self = this;
+		console.log('the addqueued player function was passed down properlu:', this.props.addQueuedPlayer);
 		console.log('i was clicked!');
 		axios({
 			method: 'delete',
@@ -21,6 +22,7 @@ class Player extends React.Component {
 		.then(function (resp) {
 			console.log('i deleted the player, the resp is:',resp);
 			console.log('i have the right function!', self.props.getTeam);
+			console.log('i called add queued player!');
 			self.props.getTeam();
 		})
 		.catch(function (err) {
