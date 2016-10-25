@@ -19,12 +19,10 @@ function makeid() {
 
 gameController.POST = (req, res) => {
   var secretpw = makeid();
-  console.log('this is the secret pw inside post', secretpw);
   var location = req.body.location;
   var game = Game.build({ time: req.body.time, token: secretpw, location: location, active: true });
   var team1 = Team.build({ count: 1 });
   var team2 = Team.build({ count: 0 });
-  console.log(req.body.time, 'this is req.body.time');
     var player = Player.build({
       arrivalTime: req.body.time,
       active: false,
@@ -33,21 +31,15 @@ gameController.POST = (req, res) => {
       admin: true,
     });
   game.save().then(function () {
-    console.log('i saved game properly');
       team1.save().then(function () {
-        console.log('i saved team 1 properly');
         this.setGame(game);
         player.save().then(function () {
-          console.log('i saved player properly');
           this.setGame(game);
           this.setTeam(team1);
-
-          // team.setPlayer(this);
         });
       });
 
       team2.save().then(function () {
-        console.log('i saved team 2 properly');
         this.setGame(game);
       });
   });
