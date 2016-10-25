@@ -18,14 +18,4 @@ var Game = sequelize.define('game', {
   },
 });
 
-// var gameModel = {};
-// gameModel.getGame = (requestedToken) => {
-//   Game.findOne({ where:
-//     {
-//       token: requestedToken
-//     }
-//   })
-
-// };
-
 module.exports = Game;
