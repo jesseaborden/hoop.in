@@ -10,8 +10,8 @@ input {
     text-align: center;
 }
 
-input[type=text]:focus {
-    border-bottom: 1px solid #FF7600;
+input[type=text]:focus, input:hover, button:hover {
+    border-bottom: 1px solid #FF7600 !important;
     outline: none;
 }
 
@@ -48,4 +48,8 @@ button a {
 
 *:focus {
     outline: none;
+}
+
+a {
+    text-decoration: none !important;
 }
